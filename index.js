@@ -1,6 +1,6 @@
 const population = new Array(100);
 
-const target = "hello josh";
+const target = "davidoriji";
 
 class DNA {
     // array of chars
@@ -85,7 +85,7 @@ function reproduction(matingPool) {
     }
 }
 
-function getBest() {
+function getBest(population, target) {
     calculateFitness(population, target);
     
     return population.filter(dna => dna.fitness > 0.6);
@@ -98,7 +98,7 @@ function main() {
         // console.log(population[i].genes, population[i].fitness);
     }
 
-    for(let gen = 0; gen < 1000; ++gen) {
+    for(let gen = 0; gen < 100; ++gen) {
         calculateFitness(population, target);
 
         const matingPool = [];
@@ -110,7 +110,11 @@ function main() {
         reproduction(matingPool);
     }
 
-    console.log(getBest());
+    const bestResults = getBest(population, target);
+
+    bestResults.sort((a, b) => a.fitness - b.fitness);
+
+    console.log(bestResults);
 }
 
 main();
